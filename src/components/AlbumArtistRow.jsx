@@ -14,7 +14,6 @@ const AlbumArtistRow = ({ title, queryType, query1, query2, query3, query4, quer
                 </div>
 
                 <Row className="justify-content-center">
-                    {/* { queries && queries.map((query, index) => <AlbumArtistCard key={index} queryType={queryType} query={query} />) } */}
                     <AlbumArtistCard queryType={queryType} query={query1}/> 
                     <AlbumArtistCard queryType={queryType} query={query2}/> 
                     <AlbumArtistCard queryType={queryType} query={query3}/> 

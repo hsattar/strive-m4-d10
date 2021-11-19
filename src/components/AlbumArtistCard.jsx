@@ -30,9 +30,9 @@ const AlbumArtistCard = ({ queryType, query }) => {
         { card &&
             <Col xs='12' sm='6' md='4' lg='3' xl='2' className="card hp-subhero-card">
                 {/* <a href="./artists/artists.html?artist=${query.id}"> */}
-                    <img src={card.picture_xl} className="card-img-top pt-2 img-fluid" alt="..." />
+                    <img src={queryType === 'artist' ? card.picture_xl : card.cover_xl} className="card-img-top pt-2 img-fluid" alt="..." />
                     <div className="card-body">
-                        <p className="hp-subhero-title">{card.name}</p>
+                        <p className="hp-subhero-title">{queryType === 'artist' ? card.name : card.title}</p>
                     </div>
                 {/* </a> */}
             </Col>
