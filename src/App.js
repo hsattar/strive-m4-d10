@@ -17,12 +17,14 @@ function App() {
           <Col xs='12'>
             <Row>
               <Sidebar />
+              <Col xs='12' lg='10' className='main-page-content'>
               <Routes>
                 <Route path='/' element={ <Home />} />
                 <Route path='/search' element={ <Search />} />
                 <Route path='/albums' element={ <Albums />} />
                 <Route path='/artists' element={ <Artists />} />
               </Routes>
+              </Col>
             </Row>
           </Col>
           <MusicPlayer />

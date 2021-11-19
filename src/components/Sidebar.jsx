@@ -8,7 +8,6 @@ const Sidebar = () => {
         <Col lg='2' className="d-none d-lg-block">
         <Row>
             <Col xs='12' className="side-bar px-0">
-                {/* <img className="spotify-logo" src="../assets/spotify-logo.png" alt="sidebar-logo" /> */}
                 <Link to='/'><img className="spotify-logo" src="../assets/spotify-logo.png" alt="sidebar-logo" /></Link>
                 
                 <Link to='/' className="d-flex selected py-2">
