@@ -1,9 +1,16 @@
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import AlbumArtistRow from '../components/AlbumArtistRow'
+import GoodMorning from '../components/GoodMorning'
 
 const Home = () => {
     return (
-        <h2>Home</h2>
+        <>
+            <GoodMorning />
+            <AlbumArtistRow 
+                title='Artist'
+                queryType='artist'
+                query='13'
+            />
+        </>
     )
 }
 
