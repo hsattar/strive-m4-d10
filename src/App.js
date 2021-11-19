@@ -8,6 +8,8 @@ import Albums from './pages/Albums'
 import Artists from './pages/Artists'
 import MusicPlayer from './components/MusicPlayer'
 import Sidebar from './components/Sidebar'
+import AlbumDetails from './pages/AlbumDetails'
+import ArtistDetails from './pages/ArtistDetails'
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
                 <Route path='/' element={ <Home />} />
                 <Route path='/search' element={ <Search />} />
                 <Route path='/albums' element={ <Albums />} />
+                <Route path='/album/:albumId' element={ <AlbumDetails />} />
                 <Route path='/artists' element={ <Artists />} />
+                <Route path='/artist/:artistId' element={ <ArtistDetails />} />
               </Routes>
               </Col>
             </Row>
