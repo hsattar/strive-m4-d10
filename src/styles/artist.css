@@ -1,0 +1,94 @@
+.artist-name {
+  color: var(--light-green);
+  text-transform: uppercase;
+  font-size: 50px;
+}
+.title {
+  position: absolute;
+  left: 125px;
+}
+.duration {
+  position: relative;
+  left: 820px;
+}
+
+.album-img-container .col-12 {
+  padding: 0;
+}
+
+.divider {
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;  
+}
+
+.album-img-header {
+  height: 500px;
+}
+
+.album-header-image {
+  /* background-image: url(../../public/assets/queen1.jpg); */
+  height: 100%;
+  padding: 1.25rem;
+  background-position: center;
+}
+
+.album-info {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+}
+.album-info > p:first-of-type {
+  font-size: 70px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.follow-btn {
+  margin-left: 1.5rem;
+  border: 1px solid var(--white);
+  padding: 0.25rem 0.75rem;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.follow-btn:hover {
+  background-color: var(--white);
+  color: var(--black);
+  cursor: pointer;
+}
+
+.see-more {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.album-header-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.artist-song-img {
+  height: 40px;
+}
+
+.artist-pick-img {
+  height: 60px;
+}
+
+.posted-by img {
+  height: 20px;
+  border-radius: 50%;
+}
+
+* {
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.verified-artist-badge {
+  display: flex;
+  align-items: center;
+}
