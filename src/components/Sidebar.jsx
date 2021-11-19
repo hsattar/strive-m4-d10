@@ -1,8 +1,12 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 const Sidebar = () => {
+
+    const location = useLocation()
+    const path = location.pathname
+    console.log(path.substr(0, 7))
 
     return (
         <Col lg='2' className="d-none d-lg-block">
@@ -10,7 +14,7 @@ const Sidebar = () => {
             <Col xs='12' className="side-bar px-0">
                 <Link to='/'><img className="spotify-logo" src="../assets/spotify-logo.png" alt="sidebar-logo" /></Link>
                 
-                <Link to='/' className="d-flex selected py-2">
+                <Link to='/' className={ path === '/' ? "d-flex selected py-2" : "d-flex py-2"}>
                     <i className="bi bi-house-door mx-3"></i>
                     <p>Home</p>
                 </Link> 
@@ -25,12 +29,12 @@ const Sidebar = () => {
                     <p>Your Library</p>
                 </Link> 
 
-                <Link to='/albums' className="d-flex py-2">
+                <Link to='/albums' className={ path.substr(0, 6) === '/album' ? "d-flex selected py-2" : "d-flex py-2"}>
                     <i className="bi bi-vinyl mx-3"></i>
                     <p>Albums</p>
                 </Link> 
 
-                <Link to='/artists' className="d-flex py-2">
+                <Link to='/artists' className={ path.substr(0, 7) === '/artist' ? "d-flex selected py-2" : "d-flex py-2"}>
                     <i className="bi bi-music-note-beamed mx-3"></i>
                     <p>Artists</p>
                 </Link> 
