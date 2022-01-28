@@ -13,7 +13,8 @@ export const initialState = {
         albums: []
     },
     songs: {
-        data: []
+        data: [],
+        isError:null
     },
     currentlySelected: {
         artist: {},
