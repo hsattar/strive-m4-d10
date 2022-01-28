@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import SongRow from '../components/SongRow'
+import { addCurrentlySelectedArtistAction } from '../redux/actions'
 
-const ArtistDetails = () => {
+const mapDispatchToProps = dispatch => ({
+    addCurrentlySelectedArtist: artist => dispatch(addCurrentlySelectedArtistAction(artist))
+})
+
+const ArtistDetails = ({ addCurrentlySelectedArtist }) => {
 
     const params = useParams()
     const artistId = params.artistId
@@ -91,7 +97,7 @@ const ArtistDetails = () => {
                 <div id="album-songs-container" className="bg-wrapper px-4">
                 <div className="row my-3 album-controls">
                 <div className="col-12 album-action-icons d-flex align-items-center">
-                    <i className="bi bi-play-circle-fill"><div className="white-bg"></div></i>
+                    <i className="bi bi-play-circle-fill" onClick={() => addCurrentlySelectedArtist(artist)}><div className="white-bg"></div></i>
                     <i className="bi bi-heart"></i>
                     <i className="bi bi-three-dots"></i>
                 </div>
@@ -124,4 +130,4 @@ const ArtistDetails = () => {
     )
 }
 
-export default ArtistDetails
+export default connect(state => ({}), mapDispatchToProps)(ArtistDetails)

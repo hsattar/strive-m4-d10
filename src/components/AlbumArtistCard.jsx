@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Col from 'react-bootstrap/Col'
-
 const AlbumArtistCard = ({ queryType, query }) => {
 
     const [card, setCard] = useState([])
@@ -12,7 +11,6 @@ const AlbumArtistCard = ({ queryType, query }) => {
             if (response.ok) {
                 const data = await response.json()
                 setCard(data)
-                console.log(card)
             } else {
                 console.error('fetch failed')
             }

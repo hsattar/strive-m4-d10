@@ -3,21 +3,31 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import {addSongToLikeSAction} from '../redux/actions'
 import {connect} from 'react-redux'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 const mapStateToProps = state =>({
-    likes:state.likes.song
+    likes:state.likes.song,
+    selectedSong: state.currentlySelected.song
 })
-
 
 const mapDispatchToProps = dispatch  =>({
     addSong: (song) =>dispatch(addSongToLikeSAction(song))
 })
 
 
+const MusicPlayer = ({ selectedSong, addSong }) => {
 
+    const [audio, setAudio] = useState(new Audio(selectedSong.preview))
+    const [playing, setPlaying] = useState(false)
 
+    useEffect(() => {
+        playing ? audio.play() : audio.pause()
+    }, [playing])
 
-const MusicPlayer = ({addSong}) => {
+    useEffect(() => {
+        setAudio(new Audio(selectedSong.preview))
+    }, [selectedSong])
 
     return (
         <Row className="music-controls">
@@ -27,10 +37,10 @@ const MusicPlayer = ({addSong}) => {
             <div className="song-info-footer d-flex justify-content-center justify-content-lg-start">
                 <img className="d-none d-xl-block" src="../assets/cards/9.jpg" alt="" />
                 <div className="d-flex flex-column">
-                    <p className="ml-3 mb-0 font-weight-bold">Another One Bites The Dust - Remastered 2011</p>
-                    <p className="ml-3 light-gray-text smaller-text mb-0">Queen</p>
+                    <p className="ml-3 mb-0 font-weight-bold">{selectedSong.title_short}</p>
+                    <p className="ml-3 light-gray-text smaller-text mb-0">{selectedSong.artist.name}</p>
                 </div>
-                <i className="bi bi-heart ml-2" onClick={()=>addSong()}></i>
+                <i className="bi bi-heart ml-2" onClick={()=>addSong(selectedSong)}></i>
             </div>
 
         </Col>
@@ -72,14 +82,14 @@ const MusicPlayer = ({addSong}) => {
             <div className="music-controls-section d-flex align-items-center">
                 <i className="bi bi-shuffle mx-3 light-gray-text"></i>
                 <i className="bi bi-skip-backward-fill mx-3 light-gray-text"></i>
-                <i className="bi bi-play-circle-fill mx-3"></i>
+                <i className="bi bi-play-circle-fill mx-3" onClick={() => setPlaying(!playing)}></i>
                 <i className="bi bi-skip-forward-fill mx-3 light-gray-text"></i>
                 <i className="bi bi-arrow-repeat mx-3 light-gray-text"></i>
             </div>  
             <div className="track-length d-flex align-items-center">
                 <p className="mb-0 mx-3">0:00</p>
                 <div className="track-bar"></div>
-                <p className="mb-0 mx-3">5:50</p>
+                <p className="mb-0 mx-3">0:30</p>
             </div>
         </Col>
 

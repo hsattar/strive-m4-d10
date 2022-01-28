@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import SongRow from '../components/SongRow'
+import { addCurrentlySelectedAlbumAction } from '../redux/actions'
 
-const AlbumDetails = () => {
+const mapDispatchToProps = dispatch => ({
+    addCurentlySelectedAlbum: album => dispatch(addCurrentlySelectedAlbumAction(album))
+})
+
+const AlbumDetails = ({ addCurentlySelectedAlbum }) => {
 
     const params = useParams()
     const albumId = params.albumId
@@ -76,7 +82,7 @@ const AlbumDetails = () => {
                 <div id="album-songs-container" className="bg-wrapper px-4">
                 <div className="row my-3 album-controls">
                 <div className="col-12 album-action-icons d-flex align-items-center">
-                    <i className="bi bi-play-circle-fill"><div className="white-bg"></div></i>
+                    <i className="bi bi-play-circle-fill" onClick={() => addCurentlySelectedAlbum(album)}><div className="white-bg"></div></i>
                     <i className="bi bi-heart"></i>
                     <i className="bi bi-three-dots"></i>
                 </div>
@@ -109,4 +115,4 @@ const AlbumDetails = () => {
     )
 }
 
-export default AlbumDetails
+export default connect(state => ({}), mapDispatchToProps)(AlbumDetails)
