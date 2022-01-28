@@ -4,21 +4,25 @@ import { useParams } from 'react-router-dom'
 import SongRow from '../components/SongRow'
 import { addCurrentlySelectedAlbumAction } from '../redux/actions'
 import { addAlbumToLikeSAction } from '../redux/actions'
+import {removeFromAlbumList} from '../redux/actions'
+
 
 const mapStateToProps = state =>({
     albumLikes: state.likes.albums,
-    
+    selectedAlbum : state.currentSelected.album
 })
 
 
 const mapDispatchToProps = dispatch => ({
     addCurentlySelectedAlbum: album => dispatch(addCurrentlySelectedAlbumAction(album)),
-    addAlbum: album =>dispatch(addAlbumToLikeSAction(album))
-
+    addAlbum: album =>dispatch(addAlbumToLikeSAction(album)),
+removeAlbum: album=>dispatch(removeFromAlbumList)
 })
 
 
-const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum }) => {
+const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum, selectedAlbum, albumLikes, likes }) => {
+
+    const isLike = likes.findIndex((album) => album.id === selectedAlbum.id)
 
     const params = useParams()
     const albumId = params.albumId
@@ -93,7 +97,11 @@ const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum }) => {
                 <div className="row my-3 album-controls">
                 <div className="col-12 album-action-icons d-flex align-items-center">
                     <i className="bi bi-play-circle-fill" onClick={() => addCurentlySelectedAlbum(album)}><div className="white-bg"></div></i>
-                    <i className="bi bi-heart" onClick={() => addAlbum(album)}></i>
+                    {
+                      isLike === -1 ? <i className="bi bi-heart ml-2" onClick={()=>addAlbum(album)}></i> : <i className="bi bi-heart-fill ml-2" onClick={()=>removeAlbum(selectedAlbum)}></i>
+                  }
+                    
+                    {/* <i className="bi bi-heart" onClick={() => addAlbum(album)}></i> */}
                     <i className="bi bi-three-dots"></i>
                 </div>
                 </div>
