@@ -20,7 +20,9 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-const ArtistDetails = ({ addCurrentlySelectedArtist, addArtist, selectedArtist, removeArtist }) => {
+const ArtistDetails = ({ addCurrentlySelectedArtist, addArtist, selectedArtist, removeArtist, likes }) => {
+
+    const isLike = likes.findIndex((artist) => artist.id === selectedArtist.id)
 
     const params = useParams()
     const artistId = params.artistId
@@ -112,9 +114,11 @@ const ArtistDetails = ({ addCurrentlySelectedArtist, addArtist, selectedArtist, 
                     <i className="bi bi-play-circle-fill" onClick={() => addCurrentlySelectedArtist(artist)}><div className="white-bg"></div></i>
                     
                 <i className="bi bi-heart-fill ml-2" onClick={()=>removeArtist(selectedArtist)}></i>
-                  <i 
-                className="bi bi-heart ml-2" onClick={()=>addArtist(selectedArtist)}></i>
-                    <i className="bi bi-heart" onClick={() => addArtist(artist)}></i>
+                  {
+                      isLike === -1 ? <i className="bi bi-heart ml-2" onClick={()=>addArtist(selectedArtist)}></i> : <i className="bi bi-heart-fill ml-2" onClick={()=>removeArtist(selectedArtist)}></i>
+                  }
+                  
+                    {/* <i className="bi bi-heart" onClick={() => addArtist(artist)}></i> */}
                    
                    
                    
