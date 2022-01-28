@@ -5,34 +5,37 @@ import {connect} from 'react-redux'
 import { fetchData } from '../redux/actions'
 
 const mapStateToProps =(state)=>({
-    isError:state.songs.isError
+    isError:state.songs.isError,
+    data:state.songs.data
 })
 
-const AlbumArtistCard = ({ queryType, query, isError }) => {
+const mapDispatchToProps =(dispatch)=> ({
+    fetchData: (queryType, query)=> {
+        dispatch(fetchData(queryType, query))
+    }
+})
 
-    const [card, setCard] = useState([])
+const AlbumArtistCard = ({ queryType, query, isError, data, fetchData }) => {
 
-    
 
     useEffect(() => {
         fetchData(queryType, query)
         // eslint-disable-next-line
     }, [])
+    // isError 
+    // ?   <Alert  variant="danger">
+    //         Error has occured! {isError}
+    //      </Alert>
 
     return (
         <>
         { 
-        isError 
-        ? <Alert  variant="danger">
-        Error has occured! {isError}
-      </Alert>
-        :
-        card &&
+         data &&
             <Col xs='12' sm='6' md='4' lg='3' xl='2' className="card hp-subhero-card">
                 <Link to={queryType === 'artist' ? `/artist/${query}` : `/album/${query}`}>
-                    <img src={queryType === 'artist' ? card.picture_xl : card.cover_xl} className="card-img-top pt-2 img-fluid" alt="..." />
+                    <img src={queryType === 'artist' ? data.picture_xl : data.cover_xl} className="data-img-top pt-2 img-fluid" alt="..." />
                     <div className="card-body">
-                        <p className="hp-subhero-title">{queryType === 'artist' ? card.name : card.title}</p>
+                        <p className="hp-subhero-title">{queryType === 'artist' ? data.name : data.title}</p>
                     </div>
                 </Link>
             </Col>
@@ -41,4 +44,4 @@ const AlbumArtistCard = ({ queryType, query, isError }) => {
     )
 }
 
-export default connect(mapStateToProps)(AlbumArtistCard)
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumArtistCard)
