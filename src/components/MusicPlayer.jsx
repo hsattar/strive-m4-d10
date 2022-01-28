@@ -20,19 +20,32 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
 
     const [audio, setAudio] = useState(null)
     const [playing, setPlaying] = useState(false)
+    const [time, setTime] = useState(0)
+    let musicInterval
 
     useEffect(() => {
         playing ? audio?.play() : audio?.pause()
     }, [playing])
 
     useEffect(() => {
+        setTime(0)
         audio?.pause()
         setPlaying(false)
         const newAudio = new Audio(selectedSong?.preview)
         setAudio(newAudio)
         newAudio?.play()
-        setPlaying(true)       
+        setPlaying(true)
+        musicInterval = setInterval(() => {
+            setTime(time => time + 1)
+        }, 1000)
+
+        return () => clearInterval(musicInterval)
     }, [selectedSong])
+
+    useEffect(() => {
+        console.log(time)
+        time === 30 && clearInterval(musicInterval)
+    }, [time])
 
     return (
         <>
@@ -97,7 +110,7 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
                 <i className="bi bi-arrow-repeat mx-3 light-gray-text"></i>
             </div>  
             <div className="track-length d-flex align-items-center">
-                <p className="mb-0 mx-3">0:00</p>
+                <p className="mb-0 mx-3">{time < 10 ? `0:0${time}` : `0:${time}`}</p>
                 <div className="track-bar"></div>
                 <p className="mb-0 mx-3">0:30</p>
             </div>
