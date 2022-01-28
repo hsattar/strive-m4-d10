@@ -6,7 +6,7 @@ const songsReducer = (state = initialState.songs, action) => {
         case ACTIONS.GET_FETCHED_SONGS:
             return{
                 ...state,
-                data: [...state.songs.data, action.payload]
+                data: action.payload
             }
         case ACTIONS.GET_FETCH_ERROR:
             return{

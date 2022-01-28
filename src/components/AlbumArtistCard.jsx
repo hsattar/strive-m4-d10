@@ -21,7 +21,7 @@ const AlbumArtistCard = ({ queryType, query, isError, data, fetchData }) => {
     useEffect(() => {
         fetchData(queryType, query)
         // eslint-disable-next-line
-    }, [])
+    }, [queryType, query])
     // isError 
     // ?   <Alert  variant="danger">
     //         Error has occured! {isError}
