@@ -18,7 +18,8 @@ export const initialState = {
     currentlySelected: {
         artist: {},
         album: {},
-        song: null
+        song: null,
+        songsToPlay: []
     }
 }
 

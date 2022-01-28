@@ -6,7 +6,8 @@ export const ACTIONS = {
     ADD_CURRENTLY_SELECTED_SONG: 'ADD_CURRENTLY_SELECTED_SONG',
     ADD_CURRENTLY_SELECTED_ALBUM: 'ADD_CURRENTLY_SELECTED_ALBUM',
     ADD_CURRENTLY_SELECTED_ARTIIST: 'ADD_CURRENTLY_SELECTED_ARTIIST',
-    GET_ALL_SONGS: 'GET_ALL_SONGS'
+    GET_ALL_SONGS: 'GET_ALL_SONGS',
+    ADD_SONGS_TO_PLAY: 'ADD_SONGS_TO_PLAY' 
 
 }
 
@@ -25,10 +26,6 @@ export const addAlbumToLikeSAction = (album) => ({
     payload: album,
 })
 
-
-
-
-
 export const addCurrentlySelectedSongAction = song => ({
     type: ACTIONS.ADD_CURRENTLY_SELECTED_SONG,
     payload: song
@@ -44,6 +41,10 @@ export const addCurrentlySelectedArtistAction = artist => ({
     payload: artist
 })
 
+export const addSongsToPlayAction = songs => ({
+    type: ACTIONS.ADD_SONGS_TO_PLAY,
+    payload: songs
+})
 
 export const removeFromSongList =(song_index)=> {
     return (dispatch)=> {

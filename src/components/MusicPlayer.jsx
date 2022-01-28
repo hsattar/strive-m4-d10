@@ -21,10 +21,11 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
     const [audio, setAudio] = useState(null)
     const [playing, setPlaying] = useState(false)
     const [time, setTime] = useState(0)
-    let musicInterval
+    const [musicInterval, setMusicInterval] = useState()
 
     useEffect(() => {
         playing ? audio?.play() : audio?.pause()
+        !playing && clearInterval(musicInterval)
     }, [playing])
 
     useEffect(() => {
@@ -35,11 +36,12 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
         setAudio(newAudio)
         newAudio?.play()
         setPlaying(true)
-        musicInterval = setInterval(() => {
+        const intervalId = setInterval(() => {
             setTime(time => time + 1)
         }, 1000)
+        setMusicInterval(intervalId)
 
-        return () => clearInterval(musicInterval)
+        return () => clearInterval(musicInterval || intervalId)
     }, [selectedSong])
 
     useEffect(() => {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import SongRow from '../components/SongRow'
-import { addCurrentlySelectedAlbumAction } from '../redux/actions'
+import { addCurrentlySelectedAlbumAction, addCurrentlySelectedSongAction, addSongsToPlayAction } from '../redux/actions'
 import { addAlbumToLikeSAction } from '../redux/actions'
 
 const mapStateToProps = state =>({
@@ -13,12 +13,13 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = dispatch => ({
     addCurentlySelectedAlbum: album => dispatch(addCurrentlySelectedAlbumAction(album)),
-    addAlbum: album =>dispatch(addAlbumToLikeSAction(album))
-
+    addAlbum: album =>dispatch(addAlbumToLikeSAction(album)),
+    addSongsToPlay: songs => dispatch(addSongsToPlayAction(songs)),
+    addSelectedSong: song => dispatch(addCurrentlySelectedSongAction(song))
 })
 
 
-const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum }) => {
+const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum, addSongsToPlay, addSelectedSong }) => {
 
     const params = useParams()
     const albumId = params.albumId
@@ -92,7 +93,15 @@ const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum }) => {
                 <div id="album-songs-container" className="bg-wrapper px-4">
                 <div className="row my-3 album-controls">
                 <div className="col-12 album-action-icons d-flex align-items-center">
-                    <i className="bi bi-play-circle-fill" onClick={() => addCurentlySelectedAlbum(album)}><div className="white-bg"></div></i>
+                    <i 
+                        className="bi bi-play-circle-fill" 
+                        onClick={() => {
+                            addCurentlySelectedAlbum(album)
+                            addSongsToPlay(album.tracks.data.map(track => track.preview))
+                            addSelectedSong(album.tracks.data[0])
+                        }}
+                    >
+                    <div className="white-bg"></div></i>
                     <i className="bi bi-heart" onClick={() => addAlbum(album)}></i>
                     <i className="bi bi-three-dots"></i>
                 </div>
