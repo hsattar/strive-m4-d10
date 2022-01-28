@@ -1,8 +1,15 @@
 import { initialState } from '../store'
+import { ACTIONS } from '../actions'
 
 const likesReducer = (state = initialState.likes, action) => {
     switch (action.type) {
-        default: return state
+        case ACTIONS.ADD_SONG_TO_LIKES:
+            return {
+                ...state,
+                likes: [...state.likes.songs, action.payload]
+            }
+        default:
+            return state
     }
 }
 

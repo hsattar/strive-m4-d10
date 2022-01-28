@@ -1,8 +1,23 @@
 import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import {addSongToLikeSAction} from '../redux/actions'
+import {connect} from 'react-redux'
 
-const MusicPlayer = () => {
+const mapStateToProps = state =>({
+    likes:state.likes.song
+})
+
+
+const mapDispatchToProps = dispatch  =>({
+    addSong: (song) =>dispatch(addSongToLikeSAction(song))
+})
+
+
+
+
+
+const MusicPlayer = ({addSong}) => {
 
     return (
         <Row className="music-controls">
@@ -15,7 +30,7 @@ const MusicPlayer = () => {
                     <p className="ml-3 mb-0 font-weight-bold">Another One Bites The Dust - Remastered 2011</p>
                     <p className="ml-3 light-gray-text smaller-text mb-0">Queen</p>
                 </div>
-                <i className="bi bi-heart ml-2"></i>
+                <i className="bi bi-heart ml-2" onClick={()=>addSong()}></i>
             </div>
 
         </Col>
@@ -78,4 +93,4 @@ const MusicPlayer = () => {
     )
 }
 
-export default MusicPlayer
+export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer)
