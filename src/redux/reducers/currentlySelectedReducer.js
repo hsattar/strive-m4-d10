@@ -7,6 +7,14 @@ const currentlySelectedReducer = (state = initialState.currentlySelected, action
             ...state,
             song: action.payload
         }
+        case ACTIONS.ADD_CURRENTLY_SELECTED_ALBUM: return {
+            ...state,
+            album: action.payload
+        }
+        case ACTIONS.ADD_CURRENTLY_SELECTED_ARTIIST: return {
+            ...state,
+            artist: action.payload
+        }
         default: return state
     }
 }
