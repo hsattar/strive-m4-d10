@@ -13,7 +13,8 @@ export const initialState = {
         albums: []
     },
     songs: {
-        data: []
+        data: [],
+        searchedSongs:[]
     },
     currentlySelected: {
         artist: {},
