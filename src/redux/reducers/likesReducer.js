@@ -6,7 +6,7 @@ const likesReducer = (state = initialState.likes, action) => {
         case ACTIONS.ADD_SONG_TO_LIKES:
             return {
                 ...state,
-                likes: [...state.likes.songs, action.payload]
+                songs: [...state.songs, action.payload]
             }
         default:
             return state

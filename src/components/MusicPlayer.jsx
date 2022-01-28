@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 const mapStateToProps = state =>({
-    likes:state.likes.song,
+    likes: state.likes.songs,
     selectedSong: state.currentlySelected.song
 })
 
