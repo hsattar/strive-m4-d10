@@ -18,19 +18,40 @@ const mapDispatchToProps = dispatch  =>({
 
 const MusicPlayer = ({ selectedSong, addSong }) => {
 
-    const [audio, setAudio] = useState(new Audio(selectedSong.preview))
+    const [audio, setAudio] = useState(null)
     const [playing, setPlaying] = useState(false)
+    const [time, setTime] = useState(0)
+    let musicInterval
 
     useEffect(() => {
-        playing ? audio.play() : audio.pause()
+        playing ? audio?.play() : audio?.pause()
     }, [playing])
 
     useEffect(() => {
-        setAudio(new Audio(selectedSong.preview))
+        setTime(0)
+        audio?.pause()
+        setPlaying(false)
+        const newAudio = new Audio(selectedSong?.preview)
+        setAudio(newAudio)
+        newAudio?.play()
+        setPlaying(true)
+        musicInterval = setInterval(() => {
+            setTime(time => time + 1)
+        }, 1000)
+
+        return () => clearInterval(musicInterval)
     }, [selectedSong])
 
+    useEffect(() => {
+        console.log(time)
+        time === 30 && clearInterval(musicInterval)
+    }, [time])
+
     return (
-        <Row className="music-controls">
+        <>
+        {
+            selectedSong && 
+            <Row className="music-controls">
 
         <Col xs='10' lg='4'>
             
@@ -41,6 +62,7 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
                     <p className="ml-3 light-gray-text smaller-text mb-0">{selectedSong.artist.name}</p>
                 </div>
                 <i className="bi bi-heart ml-2" onClick={()=>addSong(selectedSong)}></i>
+                {/* <i className="bi bi-heart-fill ml-2" onClick={()=>addSong(selectedSong)}></i> */}
             </div>
 
         </Col>
@@ -82,12 +104,13 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
             <div className="music-controls-section d-flex align-items-center">
                 <i className="bi bi-shuffle mx-3 light-gray-text"></i>
                 <i className="bi bi-skip-backward-fill mx-3 light-gray-text"></i>
-                <i className="bi bi-play-circle-fill mx-3" onClick={() => setPlaying(!playing)}></i>
+                { !playing ? <i className="bi bi-play-circle-fill mx-3" onClick={() => setPlaying(!playing)}></i> : 
+                <i className="bi bi-pause-circle-fill mx-3" onClick={() => setPlaying(!playing)}></i> }
                 <i className="bi bi-skip-forward-fill mx-3 light-gray-text"></i>
                 <i className="bi bi-arrow-repeat mx-3 light-gray-text"></i>
             </div>  
             <div className="track-length d-flex align-items-center">
-                <p className="mb-0 mx-3">0:00</p>
+                <p className="mb-0 mx-3">{time < 10 ? `0:0${time}` : `0:${time}`}</p>
                 <div className="track-bar"></div>
                 <p className="mb-0 mx-3">0:30</p>
             </div>
@@ -100,6 +123,8 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
         </Col>
 
     </Row>
+        }
+        </>
     )
 }
 
