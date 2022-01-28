@@ -18,19 +18,27 @@ const mapDispatchToProps = dispatch  =>({
 
 const MusicPlayer = ({ selectedSong, addSong }) => {
 
-    const [audio, setAudio] = useState(new Audio(selectedSong.preview))
+    const [audio, setAudio] = useState(null)
     const [playing, setPlaying] = useState(false)
 
     useEffect(() => {
-        playing ? audio.play() : audio.pause()
+        playing ? audio?.play() : audio?.pause()
     }, [playing])
 
     useEffect(() => {
-        setAudio(new Audio(selectedSong.preview))
+        audio?.pause()
+        setPlaying(false)
+        const newAudio = new Audio(selectedSong?.preview)
+        setAudio(newAudio)
+        newAudio?.play()
+        setPlaying(true)       
     }, [selectedSong])
 
     return (
-        <Row className="music-controls">
+        <>
+        {
+            selectedSong && 
+            <Row className="music-controls">
 
         <Col xs='10' lg='4'>
             
@@ -41,6 +49,7 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
                     <p className="ml-3 light-gray-text smaller-text mb-0">{selectedSong.artist.name}</p>
                 </div>
                 <i className="bi bi-heart ml-2" onClick={()=>addSong(selectedSong)}></i>
+                {/* <i className="bi bi-heart-fill ml-2" onClick={()=>addSong(selectedSong)}></i> */}
             </div>
 
         </Col>
@@ -82,7 +91,8 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
             <div className="music-controls-section d-flex align-items-center">
                 <i className="bi bi-shuffle mx-3 light-gray-text"></i>
                 <i className="bi bi-skip-backward-fill mx-3 light-gray-text"></i>
-                <i className="bi bi-play-circle-fill mx-3" onClick={() => setPlaying(!playing)}></i>
+                { !playing ? <i className="bi bi-play-circle-fill mx-3" onClick={() => setPlaying(!playing)}></i> : 
+                <i className="bi bi-pause-circle-fill mx-3" onClick={() => setPlaying(!playing)}></i> }
                 <i className="bi bi-skip-forward-fill mx-3 light-gray-text"></i>
                 <i className="bi bi-arrow-repeat mx-3 light-gray-text"></i>
             </div>  
@@ -100,6 +110,8 @@ const MusicPlayer = ({ selectedSong, addSong }) => {
         </Col>
 
     </Row>
+        }
+        </>
     )
 }
 
