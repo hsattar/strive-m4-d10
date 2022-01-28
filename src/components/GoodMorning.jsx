@@ -15,14 +15,7 @@ const GoodMorning = () => {
                     </div>
                 </div>
 
-                <div className="search-bar">
-                    <div className="input-group my-3 ">
-                        <div className="input-group-prepend">
-                          <span className="input-group-text bg-dark" id="basic-addon1"><i className="bi bi-search text-white"></i></span>
-                        </div>
-                        <input type="text" name="q" className="form-control bg-dark text-white" placeholder="Songs, Artists, Albums" id="song-search" />
-                      </div>
-                </div>
+               
 
                 <div className="account">
                     <div className="btn-group">

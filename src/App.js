@@ -10,6 +10,7 @@ import MusicPlayer from './components/MusicPlayer'
 import Sidebar from './components/Sidebar'
 import AlbumDetails from './pages/AlbumDetails'
 import ArtistDetails from './pages/ArtistDetails'
+import LikedSongs from './pages/LikedSongs'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path='/album/:albumId' element={ <AlbumDetails />} />
                 <Route path='/artists' element={ <Artists />} />
                 <Route path='/artist/:artistId' element={ <ArtistDetails />} />
+                <Route path='/likedSongs' element={ <LikedSongs />} />
               </Routes>
               </Col>
             </Row>

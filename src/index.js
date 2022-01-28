@@ -8,6 +8,7 @@ import './styles/style.css'
 import './styles/search.css'
 import './styles/album.css'
 import './styles/artist.css'
+import './styles/likedSongs.css'
 import storeConfig from './redux/store'
 import { Provider } from 'react-redux'
 
