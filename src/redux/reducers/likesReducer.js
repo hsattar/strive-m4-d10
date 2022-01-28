@@ -31,13 +31,13 @@ const likesReducer = (state = initialState.likes, action) => {
         case ACTIONS.REMOVE_ARTIST_FROM_LIKES:
             return {
                 ...state,
-                artists: state.artists.filter((fav, i) => i !== action.payload)
+                artists: state.artists.filter((artist) => artist.id !== action.payload)
             }
 
         case ACTIONS.REMOVE_ALBUM_FROM_LIKES:
             return {
                 ...state,
-                album: state.albums.filter((fav, i) => i !== action.payload)
+                album: state.albums.filter((album) => album.id !== action.payload)
             }
         default:
             return state
