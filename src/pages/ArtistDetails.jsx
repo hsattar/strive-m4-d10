@@ -3,12 +3,23 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import SongRow from '../components/SongRow'
 import { addCurrentlySelectedArtistAction } from '../redux/actions'
+import { addArtistToLikeSAction } from '../redux/actions'
 
-const mapDispatchToProps = dispatch => ({
-    addCurrentlySelectedArtist: artist => dispatch(addCurrentlySelectedArtistAction(artist))
+
+const mapStateToProps = state =>({
+    likes: state.likes.artists,
+    selectedArtist: state.currentlySelected.artists
 })
 
-const ArtistDetails = ({ addCurrentlySelectedArtist }) => {
+
+
+const mapDispatchToProps = dispatch => ({
+    addCurrentlySelectedArtist: artist => dispatch(addCurrentlySelectedArtistAction(artist)),
+    addArtist: artist =>dispatch(addArtistToLikeSAction(artist))
+})
+
+
+const ArtistDetails = ({ addCurrentlySelectedArtist, addArtist, selectedArtist }) => {
 
     const params = useParams()
     const artistId = params.artistId
@@ -98,7 +109,7 @@ const ArtistDetails = ({ addCurrentlySelectedArtist }) => {
                 <div className="row my-3 album-controls">
                 <div className="col-12 album-action-icons d-flex align-items-center">
                     <i className="bi bi-play-circle-fill" onClick={() => addCurrentlySelectedArtist(artist)}><div className="white-bg"></div></i>
-                    <i className="bi bi-heart"></i>
+                    <i className="bi bi-heart" onClick={() => addArtist(selectedArtist)}></i>
                     <i className="bi bi-three-dots"></i>
                 </div>
                 </div>
@@ -130,4 +141,4 @@ const ArtistDetails = ({ addCurrentlySelectedArtist }) => {
     )
 }
 
-export default connect(state => ({}), mapDispatchToProps)(ArtistDetails)
+export default connect(mapStateToProps, mapDispatchToProps)(ArtistDetails)

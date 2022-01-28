@@ -3,12 +3,22 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import SongRow from '../components/SongRow'
 import { addCurrentlySelectedAlbumAction } from '../redux/actions'
+import { addAlbumToLikeSAction } from '../redux/actions'
 
-const mapDispatchToProps = dispatch => ({
-    addCurentlySelectedAlbum: album => dispatch(addCurrentlySelectedAlbumAction(album))
+const mapStateToProps = state =>({
+    likes: state.likes.albums,
+    
 })
 
-const AlbumDetails = ({ addCurentlySelectedAlbum }) => {
+
+const mapDispatchToProps = dispatch => ({
+    addCurentlySelectedAlbum: album => dispatch(addCurrentlySelectedAlbumAction(album)),
+    addAlbum: album =>dispatch(addAlbumToLikeSAction(album))
+
+})
+
+
+const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum }) => {
 
     const params = useParams()
     const albumId = params.albumId
@@ -83,7 +93,7 @@ const AlbumDetails = ({ addCurentlySelectedAlbum }) => {
                 <div className="row my-3 album-controls">
                 <div className="col-12 album-action-icons d-flex align-items-center">
                     <i className="bi bi-play-circle-fill" onClick={() => addCurentlySelectedAlbum(album)}><div className="white-bg"></div></i>
-                    <i className="bi bi-heart"></i>
+                    <i className="bi bi-heart" onClick={(album)=>addAlbum(album)}></i>
                     <i className="bi bi-three-dots"></i>
                 </div>
                 </div>
@@ -115,4 +125,4 @@ const AlbumDetails = ({ addCurentlySelectedAlbum }) => {
     )
 }
 
-export default connect(state => ({}), mapDispatchToProps)(AlbumDetails)
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumDetails)
