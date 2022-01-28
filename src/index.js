@@ -8,10 +8,14 @@ import './styles/style.css'
 import './styles/search.css'
 import './styles/album.css'
 import './styles/artist.css'
+import storeConfig from './redux/store'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={storeConfig}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )
