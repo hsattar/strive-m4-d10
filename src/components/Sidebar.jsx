@@ -39,7 +39,7 @@ const Sidebar = () => {
                     <p>Artists</p>
                 </Link> 
 
-                <Link to='/' className="d-flex py-2">
+                <Link to='/likedSongs' className="d-flex py-2">
                     <i className="bi bi-heart-fill mx-3"></i>
                     <p>Liked Songs</p>
                 </Link> 
