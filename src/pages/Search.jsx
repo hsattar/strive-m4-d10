@@ -44,6 +44,7 @@ const Search = ({ searchArtist, searchedSongs }) => {
         {
         searchedSongs &&
         searchedSongs
+        .filter((song) => song.artist.name.toLowerCase().includes(inputValue))
             .map((song) => (
               <Col xs={3} key={song.artist.id}>
                 <img
