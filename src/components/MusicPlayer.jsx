@@ -2,12 +2,25 @@ import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 const mapStateToProps = state => ({
     selectedSong: state.currentlySelected.song
 })
 
 const MusicPlayer = ({ selectedSong }) => {
+
+    const [audio, setAudio] = useState(new Audio(selectedSong.preview))
+    const [playing, setPlaying] = useState(false)
+
+    useEffect(() => {
+        playing ? audio.play() : audio.pause()
+    }, [playing])
+
+    useEffect(() => {
+        setAudio(new Audio(selectedSong.preview))
+    }, [selectedSong])
 
     return (
         <Row className="music-controls">
@@ -62,7 +75,7 @@ const MusicPlayer = ({ selectedSong }) => {
             <div className="music-controls-section d-flex align-items-center">
                 <i className="bi bi-shuffle mx-3 light-gray-text"></i>
                 <i className="bi bi-skip-backward-fill mx-3 light-gray-text"></i>
-                <i className="bi bi-play-circle-fill mx-3"></i>
+                <i className="bi bi-play-circle-fill mx-3" onClick={() => setPlaying(!playing)}></i>
                 <i className="bi bi-skip-forward-fill mx-3 light-gray-text"></i>
                 <i className="bi bi-arrow-repeat mx-3 light-gray-text"></i>
             </div>  
