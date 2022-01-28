@@ -1,11 +1,19 @@
 import { connect } from "react-redux";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import '../styles/likedSongs.css'
+import { removeFromSongList } from "../redux/actions";
+
 const mapStateToProps = (state) => ({
   likedSongs: state.likes.songs,
 });
 
-const LikedSongs = ({ likedSongs }) => {
+const mapDispatchToProps =(dispatch)=> ({
+    removeSongs:(song_index)=> {
+        dispatch(removeFromSongList(song_index))
+    }
+})
+
+const LikedSongs = ({ likedSongs, removeSongs }) => {
   return (
       <>
       {likedSongs &&
@@ -16,8 +24,8 @@ const LikedSongs = ({ likedSongs }) => {
                 <i class="bi bi-play-circle-fill">
                   <div class="white-bg"></div>
                 </i>
-                <i class="bi bi-heart"></i>
                 <i class="bi bi-three-dots"></i>
+                <RiDeleteBin6Line className="ml-auto" style={{ background: "#282C34", fontSize:"20px"}} onClick={() => {removeSongs(i)}}/>
               </div>
             </div>
 
@@ -43,4 +51,4 @@ const LikedSongs = ({ likedSongs }) => {
   );
 };
 
-export default connect(mapStateToProps)(LikedSongs);
+export default connect(mapStateToProps, mapDispatchToProps)(LikedSongs);

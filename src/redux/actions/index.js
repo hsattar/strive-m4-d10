@@ -4,6 +4,7 @@ export const ACTIONS = {
     ADD_CURRENTLY_SELECTED_SONG: 'ADD_CURRENTLY_SELECTED_SONG',
     ADD_CURRENTLY_SELECTED_ALBUM: 'ADD_CURRENTLY_SELECTED_ALBUM',
     ADD_CURRENTLY_SELECTED_ARTIIST: 'ADD_CURRENTLY_SELECTED_ARTIIST'
+
 }
 
 export const addSongToLikeSAction = (songs) => ({
@@ -25,3 +26,14 @@ export const addCurrentlySelectedArtistAction = artist => ({
     type: ACTIONS.ADD_CURRENTLY_SELECTED_ARTIIST,
     payload: artist
 })
+
+
+export const removeFromSongList =(song_index)=> {
+    return (dispatch)=> {
+        dispatch({
+            type: ACTIONS.REMOVE_SONG_FROM_LIKES,
+            payload: song_index
+
+        })
+    }
+}
