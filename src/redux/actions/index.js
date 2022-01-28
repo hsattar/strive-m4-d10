@@ -47,11 +47,11 @@ export const addCurrentlySelectedArtistAction = artist => ({
 })
 
 
-export const removeFromSongList = (song_index) => {
+export const removeFromSongList = (song) => {
     return (dispatch) => {
         dispatch({
             type: ACTIONS.REMOVE_SONG_FROM_LIKES,
-            payload: song_index
+            payload: song
 
         })
     }

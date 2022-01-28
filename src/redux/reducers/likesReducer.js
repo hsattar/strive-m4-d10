@@ -25,7 +25,7 @@ const likesReducer = (state = initialState.likes, action) => {
         case ACTIONS.REMOVE_SONG_FROM_LIKES:
             return {
                 ...state,
-                songs: state.songs.filter((fav, i) => i !== action.payload)
+                songs: state.songs.filter(song => song.id  !== action.payload.id)
             }
 
         case ACTIONS.REMOVE_ARTIST_FROM_LIKES:
