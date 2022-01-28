@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { connect } from 'react-redux'
 
-const MusicPlayer = () => {
+const mapStateToProps = state => ({
+    selectedSong: state.currentlySelected.song
+})
+
+const MusicPlayer = ({ selectedSong }) => {
 
     return (
         <Row className="music-controls">
@@ -12,8 +17,8 @@ const MusicPlayer = () => {
             <div className="song-info-footer d-flex justify-content-center justify-content-lg-start">
                 <img className="d-none d-xl-block" src="../assets/cards/9.jpg" alt="" />
                 <div className="d-flex flex-column">
-                    <p className="ml-3 mb-0 font-weight-bold">Another One Bites The Dust - Remastered 2011</p>
-                    <p className="ml-3 light-gray-text smaller-text mb-0">Queen</p>
+                    <p className="ml-3 mb-0 font-weight-bold">{selectedSong.title_short}</p>
+                    <p className="ml-3 light-gray-text smaller-text mb-0">{selectedSong.artist.name}</p>
                 </div>
                 <i className="bi bi-heart ml-2"></i>
             </div>
@@ -64,7 +69,7 @@ const MusicPlayer = () => {
             <div className="track-length d-flex align-items-center">
                 <p className="mb-0 mx-3">0:00</p>
                 <div className="track-bar"></div>
-                <p className="mb-0 mx-3">5:50</p>
+                <p className="mb-0 mx-3">0:30</p>
             </div>
         </Col>
 
@@ -78,4 +83,4 @@ const MusicPlayer = () => {
     )
 }
 
-export default MusicPlayer
+export default connect(mapStateToProps)(MusicPlayer)
