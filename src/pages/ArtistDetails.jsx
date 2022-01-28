@@ -109,7 +109,7 @@ const ArtistDetails = ({ addCurrentlySelectedArtist, addArtist, selectedArtist }
                 <div className="row my-3 album-controls">
                 <div className="col-12 album-action-icons d-flex align-items-center">
                     <i className="bi bi-play-circle-fill" onClick={() => addCurrentlySelectedArtist(artist)}><div className="white-bg"></div></i>
-                    <i className="bi bi-heart" onClick={() => addArtist(selectedArtist)}></i>
+                    <i className="bi bi-heart" onClick={() => addArtist(artist)}></i>
                     <i className="bi bi-three-dots"></i>
                 </div>
                 </div>

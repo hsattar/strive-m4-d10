@@ -11,12 +11,12 @@ const likesReducer = (state = initialState.likes, action) => {
         case ACTIONS.ADD_ARTIST_TO_LIKES:
             return {
                 ...state,
-                artist: [...state.artists, action.payload]
+                artists: [...state.artists, action.payload]
             }
         case ACTIONS.ADD_ALBUM_TO_LIKES:
             return {
                 ...state,
-                album: [...state.albums, action.payload]
+                albums: [...state.albums, action.payload]
             }
 
 

@@ -6,7 +6,7 @@ import { addCurrentlySelectedAlbumAction } from '../redux/actions'
 import { addAlbumToLikeSAction } from '../redux/actions'
 
 const mapStateToProps = state =>({
-    likes: state.likes.albums,
+    albumLikes: state.likes.albums,
     
 })
 
@@ -93,7 +93,7 @@ const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum }) => {
                 <div className="row my-3 album-controls">
                 <div className="col-12 album-action-icons d-flex align-items-center">
                     <i className="bi bi-play-circle-fill" onClick={() => addCurentlySelectedAlbum(album)}><div className="white-bg"></div></i>
-                    <i className="bi bi-heart" onClick={(album)=>addAlbum(album)}></i>
+                    <i className="bi bi-heart" onClick={() => addAlbum(album)}></i>
                     <i className="bi bi-three-dots"></i>
                 </div>
                 </div>
