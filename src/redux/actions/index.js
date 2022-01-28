@@ -2,6 +2,8 @@ export const ACTIONS = {
     ADD_SONG_TO_LIKES: 'ADD_SONG_TO_LIKES',
     ADD_ALBUM_TO_LIKES: 'ADD_ALBUM_TO_LIKES',
     REMOVE_SONG_FROM_LIKES: 'REMOVE_SONG_FROM_LIKES',
+    REMOVE_ALBUM_FROM_LIKES: 'REMOVE_ALBUM_FROM_LIKES',
+    REMOVE_ARTIST_FROM_LIKES: 'REMOVE_ARTIST_FROM_LIKES',
     ADD_ARTIST_TO_LIKES: 'ADD_ARTIST_TO_LIKES',
     ADD_CURRENTLY_SELECTED_SONG: 'ADD_CURRENTLY_SELECTED_SONG',
     ADD_CURRENTLY_SELECTED_ALBUM: 'ADD_CURRENTLY_SELECTED_ALBUM',
@@ -45,8 +47,8 @@ export const addCurrentlySelectedArtistAction = artist => ({
 })
 
 
-export const removeFromSongList =(song_index)=> {
-    return (dispatch)=> {
+export const removeFromSongList = (song_index) => {
+    return (dispatch) => {
         dispatch({
             type: ACTIONS.REMOVE_SONG_FROM_LIKES,
             payload: song_index
@@ -55,23 +57,46 @@ export const removeFromSongList =(song_index)=> {
     }
 }
 
-export const getAllSongs =(inputValue)=> {
-    return async(dispatch)=> {
+export const removeFromAlbumList = (album_index) => {
+    return (dispatch) => {
+        dispatch({
+            type: ACTIONS.REMOVE_ALBUM_FROM_LIKES,
+            payload: album_index
+
+        })
+    }
+}
+
+
+export const removeFromArtistList = (artist_index) => {
+    return (dispatch) => {
+        dispatch({
+            type: ACTIONS.REMOVE_ARTIST_FROM_LIKES,
+            payload: artist_index
+
+        })
+    }
+}
+
+
+
+export const getAllSongs = (inputValue) => {
+    return async(dispatch) => {
         try {
             let response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${inputValue}`);
             if (response.ok) {
                 console.log("Response:", response);
-              let songs = await response.json();
-              console.log("JobsL:", songs);
-              dispatch({
-                  type: ACTIONS.GET_ALL_SONGS,
-                  payload:songs
-              })
-            }else{
-             console.log("error has ocuured");
+                let songs = await response.json();
+                console.log("JobsL:", songs);
+                dispatch({
+                    type: ACTIONS.GET_ALL_SONGS,
+                    payload: songs
+                })
+            } else {
+                console.log("error has ocuured");
             }
-          } catch (error) {
+        } catch (error) {
             console.log(error);
-          }
-        };
-    }
+        }
+    };
+}
