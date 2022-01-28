@@ -8,7 +8,9 @@ const composeSafely = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 export const initialState = {
     likes: {
-        songs: []
+        songs: [],
+        artists: [],
+        albums: []
     },
     songs: {
         data: []
