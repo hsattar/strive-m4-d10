@@ -20,7 +20,7 @@ removeAlbum: album=>dispatch(removeFromAlbumList)
 })
 
 
-const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum, selectedAlbum, albumLikes, likes }) => {
+const AlbumDetails = ({ addCurentlySelectedAlbum, addAlbum, selectedAlbum, albumLikes, likes, removeAlbum }) => {
 
     const isLike = likes.findIndex((album) => album.id === selectedAlbum.id)
 
