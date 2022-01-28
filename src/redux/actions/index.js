@@ -3,7 +3,8 @@ export const ACTIONS = {
     REMOVE_SONG_FROM_LIKES: 'REMOVE_SONG_FROM_LIKES',
     ADD_CURRENTLY_SELECTED_SONG: 'ADD_CURRENTLY_SELECTED_SONG',
     ADD_CURRENTLY_SELECTED_ALBUM: 'ADD_CURRENTLY_SELECTED_ALBUM',
-    ADD_CURRENTLY_SELECTED_ARTIIST: 'ADD_CURRENTLY_SELECTED_ARTIIST'
+    ADD_CURRENTLY_SELECTED_ARTIIST: 'ADD_CURRENTLY_SELECTED_ARTIIST',
+    GET_ALL_SONGS: 'GET_ALL_SONGS'
 
 }
 
@@ -37,3 +38,24 @@ export const removeFromSongList =(song_index)=> {
         })
     }
 }
+
+export const getAllSongs =(inputValue)=> {
+    return async(dispatch)=> {
+        try {
+            let response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${inputValue}`);
+            if (response.ok) {
+                console.log("Response:", response);
+              let songs = await response.json();
+              console.log("JobsL:", songs);
+              dispatch({
+                  type: ACTIONS.GET_ALL_SONGS,
+                  payload:songs
+              })
+            }else{
+             console.log("error has ocuured");
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    }

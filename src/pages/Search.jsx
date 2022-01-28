@@ -1,7 +1,22 @@
 import { Row, Col } from "react-bootstrap";
-import { useState } from "react";
-const Search = () => {
+import { useState, useEffect } from "react";
+import {connect} from 'react-redux'
+import { getAllSongs } from "../redux/actions";
+const mapStateToProps =(state)=> ({})
+
+const mapDispatchToProps =(dispatch)=> ({
+    searchArtist: (inputValue)=> {
+        dispatch(getAllSongs(inputValue))
+    }
+})
+const Search = ({searchArtist}) => {
   const [inputValue, setInputValue] = useState("");
+
+
+  useEffect(()=> {
+    searchArtist(inputValue)
+  }, [inputValue])
+  
   return (
     <Row className="justify-content-center mt-3">
       <Col xs={12} md={4} lg={6}>
@@ -28,4 +43,13 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
+
+
+//  <img src="${result.album.cover_small}" class="card-img-top pt-2 img-fluid" alt="...">
+{/* <div class="card-body">
+<div class="buttoncard"></div>
+<p class="hp-subhero-title">Song - ${result.title}</p>
+<p>Album - ${result.album.title}</p>
+<p class="hp-subhero-subtitle mb-0">${result.artist.name}</p>
+</div> */}
