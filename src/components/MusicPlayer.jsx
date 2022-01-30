@@ -48,7 +48,7 @@ const MusicPlayer = ({ selectedSong, addSong, removeSongfromLikes, likes }) => {
     }, [selectedSong])
 
     useEffect(() => {
-        console.log(time)
+       
         time === 30 && clearInterval(musicInterval)
     }, [time])
 

@@ -8,7 +8,8 @@ import { removeFromArtistList } from '../redux/actions'
 
 const mapStateToProps = state =>({
     likes: state.likes.artists,
-    selectedArtist: state.currentlySelected.artists
+    selectedArtist: state.currentlySelected.artist,
+    
 })
 
 
@@ -21,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 const ArtistDetails = ({ addCurrentlySelectedArtist, addArtist, selectedArtist, removeArtist, likes }) => {
-
+console.log("this is like/artists state ", likes.artists)
     const isLike = likes.findIndex((artist) => artist.id === selectedArtist.id)
 
     const params = useParams()
@@ -113,12 +114,12 @@ const ArtistDetails = ({ addCurrentlySelectedArtist, addArtist, selectedArtist, 
                 <div className="col-12 album-action-icons d-flex align-items-center">
                     <i className="bi bi-play-circle-fill" onClick={() => addCurrentlySelectedArtist(artist)}><div className="white-bg"></div></i>
                     
-                <i className="bi bi-heart-fill ml-2" onClick={()=>removeArtist(selectedArtist)}></i>
+               
                   {
                       isLike === -1 ? <i className="bi bi-heart ml-2" onClick={()=>addArtist(selectedArtist)}></i> : <i className="bi bi-heart-fill ml-2" onClick={()=>removeArtist(selectedArtist)}></i>
                   }
                   
-                    {/* <i className="bi bi-heart" onClick={() => addArtist(artist)}></i> */}
+                   
                    
                    
                    
